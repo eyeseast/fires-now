@@ -18,15 +18,17 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "sirv-cli": "^0.4.5",
     "@tmcw/togeojson": "^3.0.1",
     "node-fetch": "^2.6.0",
     "xmldom": "0.1.27"
   },
   "scripts": {
     "build": "rollup -c",
+    "fires": "node fires.js > public/fires.json",
     "watch": "rollup -c -w",
-    "server": "node server.js",
-    "start": "run-s build server",
-    "start:dev": "node server.js"
+    "serve": "sirv public --port \"$PORT\"",
+    "start": "npm-run-all fires build serve",
+    "start:dev": "sirv public --dev --port \"$PORT\""
   }
 }
